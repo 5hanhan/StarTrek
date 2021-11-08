@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Star Trek</title>
+    <link rel="stylesheet" type="text/css" href="css/Star Trek.css"/>
+</head>
+<body>
+    <!--<p>游戏规则：通过右下角的摇杆对飞机进行移动，不能被陨石撞击，空格键发射子弹；
+            分数每提高20，则陨石的速度加快；分数达到100则游戏胜利！</p>-->
+    <div><canvas id="cvs" width="1600" height="900"></canvas></div>
+    <dialog id="over">
+        <div>
+            <img src="img/Game Over.png" id="GameOver">
+            <img src="img/Again.png" id="Again">
+        </div>
+    </dialog>
+    <dialog id="end">
+        <div>
+            <img src="img/win.png" id="win">
+            <img src="img/Again.png" id="winAgain">
+        </div>
+    </dialog>
+    <script>
+        var cvs = document.getElementById("cvs");
+        var ctx = cvs.getContext("2d");
+        //初始场景
+        var startrek = new Image();
+        startrek.src = "img/star trek.png";
+        startrek.onload = function () {
+            ctx.beginPath();
+            ctx.drawImage(startrek,cvs.width/2 - 680/2,cvs.height/4 - 190/2, 680, 190) ;//绘制图片
+        };
+        var GameStart = new Image();
+        GameStart.src = "img/Game Start.png";
+        GameStart.onload = function () {
+            ctx.beginPath();
+            ctx.drawImage(GameStart,cvs.width/2 - 300/2 -30,cvs.height/2 -50, 300, 180) ;//绘制图片
+        };
+        var introduction = new Image();
+        introduction.src = "img/introduction.png";
+        introduction.onload = function () {
+            ctx.beginPath();
+            ctx.drawImage(introduction,cvs.width/2 - 800/2,cvs.height*2/3, 800, 300) ;//绘制图片
+        };
+        //鼠标经过开始图片变换形态
+        cvs.onmousemove = function (e) {
+            if(e.pageX - (cvs.width/2 - 300/2 -30) - cvs.offsetLeft >= 0 && e.pageX - (cvs.width/2 - 300/2 -30) - cvs.offsetLeft<= 300
+                && e.pageY - (cvs.height/2 -50) - cvs.offsetTop >= 0 && e.pageY - (cvs.height/2 -50) - cvs.offsetTop <= 180) {
+                cvs.style.cursor = "pointer";
+            } else {
+                cvs.style.cursor = "default";
+            }
+        };
+        //鼠标点击开始图片开始游戏
+        cvs.onmousedown = function (e) {
+            if(e.pageX - (cvs.width/2 - 300/2 -30) - cvs.offsetLeft >= 0 && e.pageX - (cvs.width/2 - 300/2 -30) - cvs.offsetLeft <= 300
+                && e.pageY - (cvs.height/2 -50) - cvs.offsetTop >= 0 && e.pageY - (cvs.height/2 -50) - cvs.offsetTop <= 180){
+                startGame();
+            }
+        };
+    </script>
+    <script src="js/Star Trek.js"></script>
+</body>
+</html>
